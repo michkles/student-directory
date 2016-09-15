@@ -19,8 +19,8 @@ def print_header
 end
 
 def print(arg)
-  arg.each do |item|
-    puts "#{item[:name]}(#{item[:cohort]} cohort)"
+  arg.each_with_index do |item, index|
+    puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
   end
 end
 
