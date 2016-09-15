@@ -1,5 +1,5 @@
 
-students = [
+studentz = [
   {name: "Dr. Hannibal Lecter", cohort: :november},
   {name: "Darth Vader", cohort: :november},
   {name: "Nurse Ratched", cohort: :november},
@@ -19,10 +19,12 @@ def print_header
 end
 
 def print(arg)
-  arg.each_with_index do |item, index|
+  new = arg.select {|item| item[:name][0] == ?D}
+  new.each_with_index do |item, index|
     puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
   end
 end
+
 
 def print_footer(arg)
 puts "Overall, we have #{arg.count} great students"
