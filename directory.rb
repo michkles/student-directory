@@ -19,11 +19,18 @@ def print_header
 end
 
 def print(arg)
-    new = arg.select {|item| item[:name].length < 12}
+    #new = arg.select {|item| item[:name].length < 12}
     #new = arg.select {|item| item[:name][0] == ?D}
-    new.each_with_index do |item, index|
-      puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
-    end
+    #new.each_with_index do |item, index|
+    #  puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
+    #end
+  i = 0
+  lgth = arg.length
+  while i < lgth
+    puts "#{i+1}.#{arg[i][:name]} (#{arg[i][:cohort]} cohort)"
+    i+=1
+  end
+
 
 
 end
