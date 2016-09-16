@@ -27,7 +27,12 @@ def print(arg)
   i = 0
   lgth = arg.length
   while i < lgth
-    puts "#{i+1}.#{arg[i][:name]} (#{arg[i][:cohort]} cohort)"
+    width = 50
+    puts   "#{i+1}.#{arg[i][:name]}".center(width)
+    puts   "Hobby: #{arg[i][:hobby]}".center(width)
+    puts   "Country: #{arg[i][:country]}".center(width)
+    puts   "Height: #{arg[i][:height]}".center(width)
+    puts   "(#{arg[i][:cohort]} cohort)".center(width)
     i+=1
   end
 
@@ -45,12 +50,33 @@ def input_students
     puts "to finish, just hit return twice"
     # now create an empty array
     students = []
+    puts "What is your name?"
     input = gets.chomp
+    puts "What is your cohort"
+    cohort = gets.chomp
+    puts "What is your hobby?"
+    hobby = gets.chomp
+    puts "What is your country of birth?"
+    country = gets.chomp
+    puts "What is your height?"
+    height = gets.chomp
+
 
     while !input.empty? do
-      students << {name: input, cohort: :november}
+      students << {name: input, cohort: cohort = "september", hobby: hobby, country: country, height: height}
       puts "Now we have #{students.count} students"
+      puts "What is your name?"
       input = gets.chomp
+      if !input.empty?
+        puts "What is your cohort"
+        cohort = gets.chomp
+        puts "What is your hobby?"
+        hobby = gets.chomp
+        puts "What is your country of birth?"
+        country = gets.chomp
+        puts "What is your height?"
+        height = gets.chomp
+      end
     end
 
     students
