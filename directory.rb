@@ -55,43 +55,43 @@ def input_students
     # now create an empty array
     students = []
     puts "What is your name?"
-    name = gets.chomp.to_sym
+    name = gets.gsub(/\n/, '').to_sym
       if !name.empty?
         puts "What is your cohort"
-          cohort = gets.chomp.to_sym
+          cohort = gets.gsub(/\n/, '').to_sym
             if cohort.empty?
               cohort = "September"
             end
         puts "What is your hobby?"
-          hobby = gets.chomp.to_sym
+          hobby = gets.gsub(/\n/, '').to_sym
         puts "What is your country of birth?"
-          country = gets.chomp.to_sym
+          country = gets.gsub(/\n/, '').to_sym
         puts "What is your height?"
-          height = gets.chomp.to_sym
+          height = gets.gsub(/\n/, '').to_sym
         puts "Is everything correct?"
-            typo = gets.chomp
+            typo = gets.gsub(/\n/, '')
             if typo == "no"
               puts "Just type one of the following: name, cohort, hobby, coutry or height"
-              input = gets.chomp
+              input = gets.gsub(/\n/, '')
               case input
               when "name"
                  puts "What is your name"
-                 name = gets.chomp.to_sym
+                 name = gets.gsub(/\n/, '').to_sym
               when "cohort"
                  puts "What is your cohort"
-                 cohort = gets.chomp.to_sym
+                 cohort = gets.gsub(/\n/, '').to_sym
                    if cohort.empty?
                      cohort = "September".to_sym
                    end
               when "hobby"
                 puts "What is your hobby?"
-                hobby = gets.chomp.to_sym
+                hobby = gets.gsub(/\n/, '').to_sym
               when "country"
                 puts "What is your country of birth?"
-                country = gets.chomp.to_sym
+                country = gets.gsub(/\n/, '').to_sym
               when "height"
                 puts "What is your height?"
-                height = gets.chomp.to_sym
+                height = gets.gsub(/\n/, '').to_sym
               else
                 puts "dont' make it harder! :)"
               end
@@ -108,44 +108,44 @@ def input_students
         puts "Now we have #{a} students"
       end
 
-      puts "What is your name? 2"
-        name = gets.chomp.to_sym
+      puts "What is your name?"
+        name = gets.gsub(/\n/, '').to_sym
           if !name.empty?
             puts "What is your cohort"
-              cohort = gets.chomp.to_sym
+              cohort = gets.gsub(/\n/, '').to_sym
                 if cohort.empty?
                   cohort = "September".to_sym
                 end
             puts "What is your hobby?"
-              hobby = gets.chomp.to_sym
+              hobby = gets.gsub(/\n/, '').to_sym
             puts "What is your country of birth?"
-              country = gets.chomp.to_sym
+              country = gets.gsub(/\n/, '').to_sym
             puts "What is your height?"
-              height = gets.chomp.to_sym
+              height = gets.gsub(/\n/, '').to_sym
               puts "Is everything correct?"
-                  typo = gets.chomp
+                  typo = gets.gsub(/\n/, '')
                   if typo == "no"
                     puts "Just type one of the following: name, cohort, hobby, coutry or height"
-                    input = gets.chomp
+                    input = gets.gsub(/\n/, '')
                     case input
                     when "name"
                        puts "What is your name"
-                       name = gets.chomp.to_sym
+                       name = gets.gsub(/\n/, '').to_sym
                     when "cohort"
                        puts "What is your cohort"
-                       cohort = gets.chomp.to_sym
+                       cohort = gets.gsub(/\n/, '').to_sym
                          if cohort.empty?
                            cohort = "September"
                          end
                     when "hobby"
                       puts "What is your hobby?"
-                      hobby = gets.chomp.to_sym
+                      hobby = gets.gsub(/\n/, '').to_sym
                     when "country"
                       puts "What is your country of birth?"
-                      country = gets.chomp.to_sym
+                      country = gets.gsub(/\n/, '').to_sym
                     when "height"
                       puts "What is your height?"
-                      height = gets.chomp.to_sym
+                      height = gets.gsub(/\n/, '').to_sym
                     else
                       puts "dont' make it harder! :)"
                     end
