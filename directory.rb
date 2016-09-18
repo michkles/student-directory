@@ -24,17 +24,24 @@ def print(arg)
     #new.each_with_index do |item, index|
     #  puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
     #end
+  sort_by = arg.sort_by{|x| x[:cohort]}
+  puts sort_by
+
+
   i = 0
-  lgth = arg.length
+  lgth = sort_by.length
   while i < lgth
     width = 50
-    puts   "#{i+1}.#{arg[i][:name]}".center(width)
-    puts   "Hobby: #{arg[i][:hobby]}".center(width)
-    puts   "Country: #{arg[i][:country]}".center(width)
-    puts   "Height: #{arg[i][:height]}".center(width)
-    puts   "(#{arg[i][:cohort]} cohort)".center(width)
+    puts   "#{i+1}.#{sort_by[i][:name]}".center(width)
+    puts   "Hobby: #{sort_by[i][:hobby]}".center(width)
+    puts   "Country: #{sort_by[i][:country]}".center(width)
+    puts   "Height: #{sort_by[i][:height]}".center(width)
+    puts   "(#{sort_by[i][:cohort]} cohort)".center(width)
     i+=1
   end
+
+
+
 
 
 
@@ -64,7 +71,7 @@ def input_students
           country = gets.chomp.to_sym
         puts "What is your height?"
           height = gets.chomp.to_sym
-        puts "Is everything ok?"
+        puts "Is everything correct?"
             typo = gets.chomp
             if typo == "no"
               puts "Just type one of the following: name, cohort, hobby, coutry or height"
@@ -77,7 +84,7 @@ def input_students
                  puts "What is your cohort"
                  cohort = gets.chomp.to_sym
                    if cohort.empty?
-                     cohort = "September"
+                     cohort = "September".to_sym
                    end
               when "hobby"
                 puts "What is your hobby?"
@@ -99,7 +106,7 @@ def input_students
       students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
 
       puts "Now we have #{students.count} students"
-      puts "What is your name? 2"
+      puts "What is your name?"
         name = gets.chomp.to_sym
           if !name.empty?
             puts "What is your cohort"
@@ -113,7 +120,7 @@ def input_students
               country = gets.chomp.to_sym
             puts "What is your height?"
               height = gets.chomp.to_sym
-              puts "Is everything ok?"
+              puts "Is everything correct?"
                   typo = gets.chomp
                   if typo == "no"
                     puts "Just type one of the following: name, cohort, hobby, coutry or height"
@@ -140,7 +147,7 @@ def input_students
                     else
                       puts "dont' make it harder! :)"
                     end
-                  end  
+                  end
           end
     end
 
