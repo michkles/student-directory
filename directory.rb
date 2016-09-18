@@ -51,32 +51,97 @@ def input_students
     # now create an empty array
     students = []
     puts "What is your name?"
-    input = gets.chomp
-    puts "What is your cohort"
-    cohort = gets.chomp
-    puts "What is your hobby?"
-    hobby = gets.chomp
-    puts "What is your country of birth?"
-    country = gets.chomp
-    puts "What is your height?"
-    height = gets.chomp
-
-
-    while !input.empty? do
-      students << {name: input, cohort: cohort = "september", hobby: hobby, country: country, height: height}
-      puts "Now we have #{students.count} students"
-      puts "What is your name?"
-      input = gets.chomp
-      if !input.empty?
+    name = gets.chomp.to_sym
+      if !name.empty?
         puts "What is your cohort"
-        cohort = gets.chomp
+          cohort = gets.chomp.to_sym
+            if cohort.empty?
+              cohort = "September"
+            end
         puts "What is your hobby?"
-        hobby = gets.chomp
+          hobby = gets.chomp.to_sym
         puts "What is your country of birth?"
-        country = gets.chomp
+          country = gets.chomp.to_sym
         puts "What is your height?"
-        height = gets.chomp
+          height = gets.chomp.to_sym
+        puts "Is everything ok?"
+            typo = gets.chomp
+            if typo == "no"
+              puts "Just type one of the following: name, cohort, hobby, coutry or height"
+              input = gets.chomp
+              case input
+              when "name"
+                 puts "What is your name"
+                 name = gets.chomp.to_sym
+              when "cohort"
+                 puts "What is your cohort"
+                 cohort = gets.chomp.to_sym
+                   if cohort.empty?
+                     cohort = "September"
+                   end
+              when "hobby"
+                puts "What is your hobby?"
+                hobby = gets.chomp.to_sym
+              when "country"
+                puts "What is your country of birth?"
+                country = gets.chomp.to_sym
+              when "height"
+                puts "What is your height?"
+                height = gets.chomp.to_sym
+              else
+                puts "dont' make it harder! :)"
+              end
+            end
       end
+
+
+    while !name.empty? do
+      students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
+
+      puts "Now we have #{students.count} students"
+      puts "What is your name? 2"
+        name = gets.chomp.to_sym
+          if !name.empty?
+            puts "What is your cohort"
+              cohort = gets.chomp.to_sym
+                if cohort.empty?
+                  cohort = "September".to_sym
+                end
+            puts "What is your hobby?"
+              hobby = gets.chomp.to_sym
+            puts "What is your country of birth?"
+              country = gets.chomp.to_sym
+            puts "What is your height?"
+              height = gets.chomp.to_sym
+              puts "Is everything ok?"
+                  typo = gets.chomp
+                  if typo == "no"
+                    puts "Just type one of the following: name, cohort, hobby, coutry or height"
+                    input = gets.chomp
+                    case input
+                    when "name"
+                       puts "What is your name"
+                       name = gets.chomp.to_sym
+                    when "cohort"
+                       puts "What is your cohort"
+                       cohort = gets.chomp.to_sym
+                         if cohort.empty?
+                           cohort = "September"
+                         end
+                    when "hobby"
+                      puts "What is your hobby?"
+                      hobby = gets.chomp.to_sym
+                    when "country"
+                      puts "What is your country of birth?"
+                      country = gets.chomp.to_sym
+                    when "height"
+                      puts "What is your height?"
+                      height = gets.chomp.to_sym
+                    else
+                      puts "dont' make it harder! :)"
+                    end
+                  end  
+          end
     end
 
     students
