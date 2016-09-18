@@ -25,9 +25,6 @@ def print(arg)
     #  puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
     #end
   sort_by = arg.sort_by{|x| x[:cohort]}
-  puts sort_by
-
-
   i = 0
   lgth = sort_by.length
   while i < lgth
@@ -104,9 +101,14 @@ def input_students
 
     while !name.empty? do
       students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
+      a = students.count
+      unless a > 1
+        puts "Now we have 1 student"
+      else
+        puts "Now we have #{a} students"
+      end
 
-      puts "Now we have #{students.count} students"
-      puts "What is your name?"
+      puts "What is your name? 2"
         name = gets.chomp.to_sym
           if !name.empty?
             puts "What is your cohort"
