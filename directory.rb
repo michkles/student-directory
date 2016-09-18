@@ -1,18 +1,3 @@
-
-studentz = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
-
 def print_header
   puts "The students of Villains Academy"
   puts "------------"
@@ -24,24 +9,20 @@ def print(arg)
     #new.each_with_index do |item, index|
     #  puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
     #end
+  if !arg.empty?
   sort_by = arg.sort_by{|x| x[:cohort]}
   i = 0
   lgth = sort_by.length
-  while i < lgth
-    width = 50
-    puts   "#{i+1}.#{sort_by[i][:name]}".center(width)
-    puts   "Hobby: #{sort_by[i][:hobby]}".center(width)
-    puts   "Country: #{sort_by[i][:country]}".center(width)
-    puts   "Height: #{sort_by[i][:height]}".center(width)
-    puts   "(#{sort_by[i][:cohort]} cohort)".center(width)
-    i+=1
+    while i < lgth
+      width = 50
+      puts   "#{i+1}.#{sort_by[i][:name]}".center(width)
+      puts   "Hobby: #{sort_by[i][:hobby]}".center(width)
+      puts   "Country: #{sort_by[i][:country]}".center(width)
+      puts   "Height: #{sort_by[i][:height]}".center(width)
+      puts   "(#{sort_by[i][:cohort]} cohort)".center(width)
+      i+=1
+    end
   end
-
-
-
-
-
-
 end
 
 
