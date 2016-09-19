@@ -1,16 +1,18 @@
+@students = []
+
 def print_header
   puts "The students of Villains Academy"
   puts "------------"
 end
 
-def print(arg)
+def print_students_list
     #new = arg.select {|item| item[:name].length < 12}
     #new = arg.select {|item| item[:name][0] == ?D}
     #new.each_with_index do |item, index|
     #  puts "#{index + 1}.#{item[:name]} (#{item[:cohort]} cohort)"
     #end
-  if !arg.empty?
-  sort_by = arg.sort_by{|x| x[:cohort]}
+  if !@students.empty?
+  sort_by = @students.sort_by{|x| x[:cohort]}
   i = 0
   lgth = sort_by.length
     while i < lgth
@@ -26,8 +28,8 @@ def print(arg)
 end
 
 
-def print_footer(arg)
-puts "Overall, we have #{arg.count} great students"
+def print_footer
+puts "Overall, we have #{@students.count} great students"
 end
 
 def input_students
@@ -81,8 +83,8 @@ def input_students
 
 
     while !name.empty? do
-      students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
-      a = students.count
+      @students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
+      a = @students.count
       unless a > 1
         puts "Now we have 1 student"
       else
@@ -134,30 +136,39 @@ def input_students
           end
     end
 
-    students
+    #students
 end
 
 def interactive_menu
-  students = []
   loop do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    selection = gets.chomp
-      case selection
-        when "1"
-          students = input_students
-        when "2"
-          print_header
-          print(students)
-          print_footer(students)
-        when "9"
-          exit
-        else
-          puts "I don't know what you meant, try again"
-      end
+    print_menu
+    process(gets.chomp)
   end
 end
 
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "I don't know what you meant, try again"
+    end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
 
 interactive_menu
