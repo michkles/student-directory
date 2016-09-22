@@ -56,28 +56,7 @@ def input_students
             if typo == "no"
               puts "Just type one of the following: name, cohort, hobby, coutry or height"
               input = STDIN.gets.gsub(/\n/, '')
-              case input
-              when "name"
-                 puts "What is your name"
-                 name = STDIN.gets.gsub(/\n/, '')
-              when "cohort"
-                 puts "What is your cohort"
-                 cohort = STDIN.gets.gsub(/\n/, '').to_sym
-                   if cohort.empty?
-                     cohort = "September".to_sym
-                   end
-              when "hobby"
-                puts "What is your hobby?"
-                hobby = STDIN.gets.gsub(/\n/, '')
-              when "country"
-                puts "What is your country of birth?"
-                country = STDIN.gets.gsub(/\n/, '')
-              when "height"
-                puts "What is your height?"
-                height = STDIN.gets.gsub(/\n/, '')
-              else
-                puts "dont' make it harder! :)"
-              end
+              typo_met(input)
             end
       end
 
@@ -110,28 +89,7 @@ def input_students
                   if typo == "no"
                     puts "Just type one of the following: name, cohort, hobby, coutry or height"
                     input = STDIN.gets.gsub(/\n/, '')
-                    case input
-                    when "name"
-                       puts "What is your name"
-                       name = STDIN.gets.gsub(/\n/, '')
-                    when "cohort"
-                       puts "What is your cohort"
-                       cohort = STDIN.gets.gsub(/\n/, '').to_sym
-                         if cohort.empty?
-                           cohort = "September".to_sym
-                         end
-                    when "hobby"
-                      puts "What is your hobby?"
-                      hobby = STDIN.gets.gsub(/\n/, '')
-                    when "country"
-                      puts "What is your country of birth?"
-                      country = STDIN.gets.gsub(/\n/, '')
-                    when "height"
-                      puts "What is your height?"
-                      height = STDIN.gets.gsub(/\n/, '')
-                    else
-                      puts "dont' make it harder! :)"
-                    end
+                    typo_met(input)
                   end
           end
     end
@@ -154,8 +112,11 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      load_students
+      puts "Enter name of the file to load:"
+      filename = gets.chomp
+      load_students(filename)
     when "9"
+      puts "Exiting now..."
       exit
     else
       puts "I don't know what you meant, try again"
@@ -165,8 +126,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list"
+  puts "4. Load the list from a file:"
   puts "9. Exit"
 end
 
@@ -177,22 +138,26 @@ def show_students
 end
 
 def save_students
-    file = File.open("students.csv", "w")
+    puts "Enter name of the file:"
+    input = gets.chomp
+    file = File.open(input, "w")
     @students.each do |student|
       student_data = [student[:name], student[:cohort], student[:hobby], student[:country],student[:height]]
       csv_line = student_data.join(",")
       file.puts csv_line
     end
     file.close
+    puts "File saved successfully"
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
+  file = File.open(filename , "r")
   file.readlines.each do |line|
     name, cohort, hobby, country, height = line.chomp.split(',')
     students_add(name, cohort, hobby, country, height)
     end
     file.close
+    puts "File loaded successfully"
 end
 
 def try_load_students
@@ -212,6 +177,36 @@ end
 def students_add(name, cohort, hobby, country, height)
   @students << {name: name, cohort: cohort.to_sym, hobby: hobby, country: country, height: height}
 end
+
+def questions
+
+end
+
+def typo_met(input)
+  case input
+  when "name"
+     puts "What is your name?"
+     name = STDIN.gets.gsub(/\n/, '')
+  when "cohort"
+     puts "What is your cohort"
+     cohort = STDIN.gets.gsub(/\n/, '').to_sym
+       if cohort.empty?
+         cohort = "September".to_sym
+       end
+  when "hobby"
+    puts "What is your hobby?"
+    hobby = STDIN.gets.gsub(/\n/, '')
+  when "country"
+    puts "What is your country of birth?"
+    country = STDIN.gets.gsub(/\n/, '')
+  when "height"
+    puts "What is your height?"
+    height = STDIN.gets.gsub(/\n/, '')
+  else
+    puts "dont' make it harder! :)"
+  end
+end
+
 
 try_load_students
 interactive_menu
