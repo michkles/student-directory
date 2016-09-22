@@ -83,7 +83,7 @@ def input_students
 
 
     while !name.empty? do
-      @students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
+      students_add(name, cohort, hobby, country, height)
       a = @students.count
       unless a > 1
         puts "Now we have 1 student"
@@ -136,7 +136,6 @@ def input_students
           end
     end
 
-    #students
 end
 
 def interactive_menu
@@ -191,14 +190,16 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort, hobby, country, height = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym, hobby: hobby, country: country, height: height}
+    students_add(name, cohort, hobby, country, height)
     end
     file.close
 end
 
 def try_load_students
   filename = ARGV.first
-  return if filename.nil?
+  if filename.nil?
+    filename = "students.csv"
+  end
   if File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
@@ -206,6 +207,10 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist"
     exit
   end
+end
+
+def students_add(name, cohort, hobby, country, height)
+  @students << {name: name, cohort: cohort.to_sym, hobby: hobby, country: country, height: height}
 end
 
 try_load_students
