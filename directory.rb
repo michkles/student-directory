@@ -116,6 +116,8 @@ def process(selection)
       puts "Enter name of the file to load:"
       input = gets.chomp
       load_csv(input)
+    when "5"
+      source_code
     when "9"
       puts "Exiting now..."
       exit
@@ -129,6 +131,7 @@ def print_menu
   puts "2. Show the students"
   puts "3. Save the list"
   puts "4. Load the list from a file:"
+  puts "5. My Source Code"
   puts "9. Exit"
 end
 
@@ -203,6 +206,15 @@ def typo_met(input)
   end
 end
 
+def source_code
+  puts "All rights reserved :)"
+    filename = $PROGRAM_NAME
+    file = File.open(filename, "r")
+    file.readlines.each do |line|
+      puts line
+    end
+    file.close
+end
 
 try_load_students
 interactive_menu
