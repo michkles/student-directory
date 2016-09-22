@@ -38,43 +38,43 @@ def input_students
     # now create an empty array
     #students = []
     puts "What is your name?"
-    name = gets.gsub(/\n/, '')
+    name = STDIN.gets.gsub(/\n/, '')
       if !name.empty?
         puts "What is your cohort"
-          cohort = gets.gsub(/\n/, '').to_sym
+          cohort = STDIN.gets.gsub(/\n/, '').to_sym
             if cohort.empty?
               cohort = "September".to_sym
             end
         puts "What is your hobby?"
-          hobby = gets.gsub(/\n/, '')
+          hobby = STDIN.gets.gsub(/\n/, '')
         puts "What is your country of birth?"
-          country = gets.gsub(/\n/, '')
+          country = STDIN.gets.gsub(/\n/, '')
         puts "What is your height?"
-          height = gets.gsub(/\n/, '')
+          height = STDIN.gets.gsub(/\n/, '')
         puts "Is everything correct?"
-            typo = gets.gsub(/\n/, '')
+            typo = STDIN.gets.gsub(/\n/, '')
             if typo == "no"
               puts "Just type one of the following: name, cohort, hobby, coutry or height"
-              input = gets.gsub(/\n/, '')
+              input = STDIN.gets.gsub(/\n/, '')
               case input
               when "name"
                  puts "What is your name"
-                 name = gets.gsub(/\n/, '')
+                 name = STDIN.gets.gsub(/\n/, '')
               when "cohort"
                  puts "What is your cohort"
-                 cohort = gets.gsub(/\n/, '').to_sym
+                 cohort = STDIN.gets.gsub(/\n/, '').to_sym
                    if cohort.empty?
                      cohort = "September".to_sym
                    end
               when "hobby"
                 puts "What is your hobby?"
-                hobby = gets.gsub(/\n/, '')
+                hobby = STDIN.gets.gsub(/\n/, '')
               when "country"
                 puts "What is your country of birth?"
-                country = gets.gsub(/\n/, '')
+                country = STDIN.gets.gsub(/\n/, '')
               when "height"
                 puts "What is your height?"
-                height = gets.gsub(/\n/, '')
+                height = STDIN.gets.gsub(/\n/, '')
               else
                 puts "dont' make it harder! :)"
               end
@@ -92,43 +92,43 @@ def input_students
       end
 
       puts "What is your name?"
-        name = gets.gsub(/\n/, '')
+        name = STDIN.gets.gsub(/\n/, '')
           if !name.empty?
             puts "What is your cohort"
-              cohort = gets.gsub(/\n/, '').to_sym
+              cohort = STDIN.gets.gsub(/\n/, '').to_sym
                 if cohort.empty?
                   cohort = "September".to_sym
                 end
             puts "What is your hobby?"
-              hobby = gets.gsub(/\n/, '')
+              hobby = STDIN.gets.gsub(/\n/, '')
             puts "What is your country of birth?"
-              country = gets.gsub(/\n/, '')
+              country = STDIN.gets.gsub(/\n/, '')
             puts "What is your height?"
-              height = gets.gsub(/\n/, '')
+              height = STDIN.gets.gsub(/\n/, '')
               puts "Is everything correct?"
-                  typo = gets.gsub(/\n/, '')
+                  typo = STDIN.gets.gsub(/\n/, '')
                   if typo == "no"
                     puts "Just type one of the following: name, cohort, hobby, coutry or height"
-                    input = gets.gsub(/\n/, '')
+                    input = STDIN.gets.gsub(/\n/, '')
                     case input
                     when "name"
                        puts "What is your name"
-                       name = gets.gsub(/\n/, '')
+                       name = STDIN.gets.gsub(/\n/, '')
                     when "cohort"
                        puts "What is your cohort"
-                       cohort = gets.gsub(/\n/, '').to_sym
+                       cohort = STDIN.gets.gsub(/\n/, '').to_sym
                          if cohort.empty?
                            cohort = "September".to_sym
                          end
                     when "hobby"
                       puts "What is your hobby?"
-                      hobby = gets.gsub(/\n/, '')
+                      hobby = STDIN.gets.gsub(/\n/, '')
                     when "country"
                       puts "What is your country of birth?"
-                      country = gets.gsub(/\n/, '')
+                      country = STDIN.gets.gsub(/\n/, '')
                     when "height"
                       puts "What is your height?"
-                      height = gets.gsub(/\n/, '')
+                      height = STDIN.gets.gsub(/\n/, '')
                     else
                       puts "dont' make it harder! :)"
                     end
@@ -142,7 +142,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -187,8 +187,8 @@ def save_students
     file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort, hobby, country, height = line.chomp.split(',')
       @students << {name: name, cohort: cohort.to_sym, hobby: hobby, country: country, height: height}
@@ -196,4 +196,17 @@ def load_students
     file.close
 end
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
+    exit
+  end
+end
+
+try_load_students
 interactive_menu
