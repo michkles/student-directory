@@ -36,64 +36,33 @@ end
 def input_students
     puts "please enter the names of the students"
     puts "to finish, just hit return twice"
-    # now create an empty array
-    #students = []
     puts "What is your name?"
-    name = STDIN.gets.gsub(/\n/, '')
-      if !name.empty?
-        puts "What is your cohort"
-          cohort = STDIN.gets.gsub(/\n/, '').to_sym
-            if cohort.empty?
-              cohort = "September".to_sym
-            end
-        puts "What is your hobby?"
-          hobby = STDIN.gets.gsub(/\n/, '')
-        puts "What is your country of birth?"
-          country = STDIN.gets.gsub(/\n/, '')
-        puts "What is your height?"
-          height = STDIN.gets.gsub(/\n/, '')
-        puts "Is everything correct?"
-            typo = STDIN.gets.gsub(/\n/, '')
-            if typo == "no"
-              puts "Just type one of the following: name, cohort, hobby, coutry or height"
-              input = STDIN.gets.gsub(/\n/, '')
-              typo_met(input)
-            end
-      end
-
-
-    while !name.empty? do
-      students_add(name, cohort, hobby, country, height)
-      a = @students.count
-      unless a > 1
-        puts "Now we have 1 student"
-      else
-        puts "Now we have #{a} students"
-      end
-
-      puts "What is your name?"
-        name = STDIN.gets.gsub(/\n/, '')
-          if !name.empty?
-            puts "What is your cohort"
-              cohort = STDIN.gets.gsub(/\n/, '').to_sym
+      name = STDIN.gets.gsub(/\n/, '')
+      while !name.empty? do
+        puts "What is your cohort?"
+            cohort = STDIN.gets.gsub(/\n/, '').to_sym
                 if cohort.empty?
                   cohort = "September".to_sym
                 end
-            puts "What is your hobby?"
-              hobby = STDIN.gets.gsub(/\n/, '')
-            puts "What is your country of birth?"
-              country = STDIN.gets.gsub(/\n/, '')
-            puts "What is your height?"
-              height = STDIN.gets.gsub(/\n/, '')
-              puts "Is everything correct?"
-                  typo = STDIN.gets.gsub(/\n/, '')
-                  if typo == "no"
-                    puts "Just type one of the following: name, cohort, hobby, coutry or height"
+        puts "What is your hobby?"
+            hobby = STDIN.gets.gsub(/\n/, '')
+        puts "What is your country of birth?"
+            country = STDIN.gets.gsub(/\n/, '')
+        puts "What is your height?"
+            height = STDIN.gets.gsub(/\n/, '')
+        puts "Is everything correct?"
+              typo = STDIN.gets.gsub(/\n/, '')
+                if typo == "no"
+                puts "Just type one of the following: name, cohort, hobby, coutry or height"
                     input = STDIN.gets.gsub(/\n/, '')
                     typo_met(input)
-                  end
-          end
-    end
+                end
+        students_add(name, cohort, hobby, country, height)
+        students_count
+        puts "What is your name?"
+          name = STDIN.gets.gsub(/\n/, '')
+        end
+  
 
 end
 
@@ -178,6 +147,16 @@ def students_add(name, cohort, hobby, country, height)
 end
 
 def questions
+
+end
+
+def students_count
+
+  unless @students.count > 1
+    puts "Now we have 1 student"
+  else
+    puts "Now we have #{@students.count} students"
+  end
 
 end
 
