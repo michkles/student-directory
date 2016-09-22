@@ -36,21 +36,21 @@ def input_students
     puts "please enter the names of the students"
     puts "to finish, just hit return twice"
     # now create an empty array
-    students = []
+    #students = []
     puts "What is your name?"
-    name = gets.gsub(/\n/, '').to_sym
+    name = gets.gsub(/\n/, '')
       if !name.empty?
         puts "What is your cohort"
           cohort = gets.gsub(/\n/, '').to_sym
             if cohort.empty?
-              cohort = "September"
+              cohort = "September".to_sym
             end
         puts "What is your hobby?"
-          hobby = gets.gsub(/\n/, '').to_sym
+          hobby = gets.gsub(/\n/, '')
         puts "What is your country of birth?"
-          country = gets.gsub(/\n/, '').to_sym
+          country = gets.gsub(/\n/, '')
         puts "What is your height?"
-          height = gets.gsub(/\n/, '').to_sym
+          height = gets.gsub(/\n/, '')
         puts "Is everything correct?"
             typo = gets.gsub(/\n/, '')
             if typo == "no"
@@ -59,7 +59,7 @@ def input_students
               case input
               when "name"
                  puts "What is your name"
-                 name = gets.gsub(/\n/, '').to_sym
+                 name = gets.gsub(/\n/, '')
               when "cohort"
                  puts "What is your cohort"
                  cohort = gets.gsub(/\n/, '').to_sym
@@ -68,13 +68,13 @@ def input_students
                    end
               when "hobby"
                 puts "What is your hobby?"
-                hobby = gets.gsub(/\n/, '').to_sym
+                hobby = gets.gsub(/\n/, '')
               when "country"
                 puts "What is your country of birth?"
-                country = gets.gsub(/\n/, '').to_sym
+                country = gets.gsub(/\n/, '')
               when "height"
                 puts "What is your height?"
-                height = gets.gsub(/\n/, '').to_sym
+                height = gets.gsub(/\n/, '')
               else
                 puts "dont' make it harder! :)"
               end
@@ -92,7 +92,7 @@ def input_students
       end
 
       puts "What is your name?"
-        name = gets.gsub(/\n/, '').to_sym
+        name = gets.gsub(/\n/, '')
           if !name.empty?
             puts "What is your cohort"
               cohort = gets.gsub(/\n/, '').to_sym
@@ -100,11 +100,11 @@ def input_students
                   cohort = "September".to_sym
                 end
             puts "What is your hobby?"
-              hobby = gets.gsub(/\n/, '').to_sym
+              hobby = gets.gsub(/\n/, '')
             puts "What is your country of birth?"
-              country = gets.gsub(/\n/, '').to_sym
+              country = gets.gsub(/\n/, '')
             puts "What is your height?"
-              height = gets.gsub(/\n/, '').to_sym
+              height = gets.gsub(/\n/, '')
               puts "Is everything correct?"
                   typo = gets.gsub(/\n/, '')
                   if typo == "no"
@@ -113,22 +113,22 @@ def input_students
                     case input
                     when "name"
                        puts "What is your name"
-                       name = gets.gsub(/\n/, '').to_sym
+                       name = gets.gsub(/\n/, '')
                     when "cohort"
                        puts "What is your cohort"
                        cohort = gets.gsub(/\n/, '').to_sym
                          if cohort.empty?
-                           cohort = "September"
+                           cohort = "September".to_sym
                          end
                     when "hobby"
                       puts "What is your hobby?"
-                      hobby = gets.gsub(/\n/, '').to_sym
+                      hobby = gets.gsub(/\n/, '')
                     when "country"
                       puts "What is your country of birth?"
-                      country = gets.gsub(/\n/, '').to_sym
+                      country = gets.gsub(/\n/, '')
                     when "height"
                       puts "What is your height?"
-                      height = gets.gsub(/\n/, '').to_sym
+                      height = gets.gsub(/\n/, '')
                     else
                       puts "dont' make it harder! :)"
                     end
@@ -153,7 +153,9 @@ def process(selection)
     when "2"
       show_students
     when "3"
-      save_students  
+      save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -164,7 +166,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3.Save the list to students.csv"
+  puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit"
 end
 
@@ -183,4 +186,14 @@ def save_students
     end
     file.close
 end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort, hobby, country, height = line.chomp.split(',')
+      @students << {name: name, cohort: cohort.to_sym, hobby: hobby, country: country, height: height}
+    end
+    file.close
+end
+
 interactive_menu
