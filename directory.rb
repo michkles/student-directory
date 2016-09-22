@@ -1,4 +1,5 @@
 @students = []
+require 'csv'
 
 def print_header
   puts "The students of Villains Academy"
@@ -113,8 +114,8 @@ def process(selection)
       save_students
     when "4"
       puts "Enter name of the file to load:"
-      filename = gets.chomp
-      load_students(filename)
+      input = gets.chomp
+      load_csv(input)
     when "9"
       puts "Exiting now..."
       exit
@@ -140,23 +141,18 @@ end
 def save_students
     puts "Enter name of the file:"
     input = gets.chomp
-    File.open(input, "w") do |f|
+    CSV.open(input, "w") do |csv|
       @students.each do |student|
-        student_data = [student[:name], student[:cohort], student[:hobby], student[:country],student[:height]]
-        csv_line = student_data.join(",")
-        f.puts csv_line
+        csv << [student[:name], student[:cohort], student[:hobby], student[:country],student[:height]]
       end
     end
     puts "File saved successfully"
 end
 
-def load_students(filename = "students.csv")
-  File.open(filename , "r") do |f|
-    f.readlines.each do |line|
-      name, cohort, hobby, country, height = line.chomp.split(',')
-      students_add(name, cohort, hobby, country, height)
-    end
-  end
+def load_csv(input)
+      CSV.foreach(input) do |name, cohort, hobby, country, height|
+        students_add(name, cohort, hobby, country, height)
+      end
     puts "File loaded successfully"
 end
 
@@ -166,7 +162,7 @@ def try_load_students
     filename = "students.csv"
   end
   if File.exists?(filename)
-    load_students(filename)
+    load_csv(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
